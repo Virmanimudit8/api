@@ -66,10 +66,19 @@ const resolvers = {
 const app = express();
 
 // Apollo Server setup
+
 const server = new ApolloServer({ typeDefs, resolvers });
 
 // Apply the Apollo GraphQL middleware and set the path to /api
-server.applyMiddleware({ app, path: '/api' });
+
+
+ async function startServer() {
+  
+  await server.start();
+  server.applyMiddleware({ app,path: '/api'});
+}
+startServer();
+
 
 app.listen({ port }, () =>
   console.log(
